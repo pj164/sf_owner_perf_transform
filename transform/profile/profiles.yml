@@ -11,10 +11,11 @@ meltano:
     postgres:
       type: postgres
       threads: 2
-      host: localhost
+      host: 35.232.140.124
       port: 5432
-      user: postgres
-      pass: password
-      dbname: postgres
+      user: devx
+      pass: Meta2021!Limits
+      dbname: dev_elt_pg_src
       schema: dbt_transform
+
 
