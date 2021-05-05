@@ -2,17 +2,17 @@
 with opportunity as (
 
     select *
-    from  postgres.records.opportunity
+    from  dev_elt_pg_src.destination.opportunity
 
 ), salesforce_user as (
 
     select *
-    from postgres.records.user
+    from dev_elt_pg_src.destination.user
 
 ), account as (
 
     select *
-    from postgres.records.account
+    from dev_elt_pg_src.destination.account
 
 ), add_fields as (
 
