@@ -1,0 +1,10 @@
+version: 2
+
+models:
+    - name: customers
+      description: "A starter dbt model"
+      columns:
+          - name: id
+            description: "The primary key for this table"
+          - name: name
+            description: "The primary key for this table"
