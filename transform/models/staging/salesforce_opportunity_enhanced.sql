@@ -37,7 +37,16 @@ with opportunity as (
         when not opportunity.iswon and opportunity.isclosed then 'Lost'
         when not opportunity.isclosed and lower(opportunity.forecastcategory) in ('pipeline','forecast','bestcase') then 'Pipeline'
         else 'Other'
-      end as status
+      end as status,
+      case when date_trunc('month', current_date) >= opportunity.createddate__t  then amount else 0 end as created_amount_this_month,
+      case when date_trunc('month', current_date) <= opportunity.createddate__t  then amount else 0 end as created_amount_this_quarter,
+      case when date_trunc('month', current_date) >= opportunity.createddate__t  then 1 else 0 end as created_count_this_month,
+      case when date_trunc('month', current_date) <= opportunity.createddate__t  then 1 else 0 end as created_count_this_quarter,
+      case when date_trunc('month', current_date) >= opportunity.createddate__t  then amount else 0 end as closed_amount_this_month,
+      case when date_trunc('month', current_date) <= opportunity.createddate__t  then amount else 0 end as closed_amount_this_quarter,
+      case when date_trunc('month', current_date) >= opportunity.createddate__t  then 1 else 0 end as closed_count_this_month,
+      case when date_trunc('month', current_date) <= opportunity.createddate__t  then 1 else 0 end as closed_count_this_quarter
+
   from opportunity
     left join account
       on opportunity.accountid = account.id
