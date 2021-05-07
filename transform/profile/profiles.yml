@@ -11,11 +11,11 @@ meltano:
     postgres:
       type: postgres
       threads: 2
-      host: 35.232.140.124
-      port: 5432
-      user: devx
-      pass: Meta2021!Limits
-      dbname: dev_elt_pg_src
-      schema: dbt_transform
+      host: "{{ env_var('db_host') }}"
+      port: "{{ env_var('db_port') }}"
+      user: "{{ env_var('db_user') }}"
+      pass: "{{ env_var('db_password') }}"
+      dbname: "{{ env_var('db_name') }}"
+      schema: "{{ env_var('db_schema') }}"
 
 

@@ -2,17 +2,17 @@
 with opportunity as (
 
     select *
-    from  dev_elt_pg_src.destination.opportunity
+    from  {{ env_var('db_name') }}.{{ env_var('db_schema') }}.opportunity
 
 ), salesforce_user as (
 
     select *
-    from dev_elt_pg_src.destination.user
+    from {{ env_var('db_name') }}.{{ env_var('db_schema') }}.user
 
 ), account as (
 
     select *
-    from dev_elt_pg_src.destination.account
+    from {{ env_var('db_name') }}.{{ env_var('db_schema') }}.account
 
 ), add_fields as (
 
