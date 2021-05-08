@@ -38,14 +38,14 @@ with opportunity as (
         when not opportunity.isclosed and lower(opportunity.forecastcategory) in ('pipeline','forecast','bestcase') then 'Pipeline'
         else 'Other'
       end as status,
-      case when date_trunc('month', current_date) >= opportunity.createddate__t  then amount else 0 end as created_amount_this_month,
+      case when opportunity.createddate__t >= date_trunc('month', current_date)   then amount else 0 end as created_amount_this_month,
       case when extract(quarter from opportunity.createddate__t) = extract(quarter from current_date) then amount else 0 end as created_amount_this_quarter,
-      case when COUNT(*) where opportunity.createddate__t = current_date  then 1 else 0 end as created_count_this_month,
-      case when COUNT(*) extract(quarter from opportunity.createddate__t) = extract(quarter from current_date)  then 1 else 0 end as created_count_this_quarter,
-      case when date_trunc('month', current_date) >= opportunity.closedate__t  then amount else 0 end as closed_amount_this_month,
+      case when opportunity.createddate__t >= date_trunc('month', current_date)   then 1 else 0 end as created_count_this_month,
+      case when extract(quarter from opportunity.createddate__t) = extract(quarter from current_date)  then 1 else 0 end as created_count_this_quarter,
+      case when opportunity.closedate__t >= date_trunc('month', current_date) then amount else 0 end as closed_amount_this_month,
       case when extract(quarter from opportunity.closedate__t) = extract(quarter from current_date)  then amount else 0 end as closed_amount_this_quarter,
-      case when COUNT(*) where opportunity.closedate__t = current_date  then 1 else 0 end as closed_count_this_month,
-      case when COUNT(*) extract(quarter from opportunity.closedate__t) = extract(quarter from current_date)  then 1 else 0 end as closed_count_this_quarter
+      case when opportunity.closedate__t >= date_trunc('month', current_date)  then 1 else 0 end as closed_count_this_month,
+      case when extract(quarter from opportunity.closedate__t) = extract(quarter from current_date)  then 1 else 0 end as closed_count_this_quarter
 
   from opportunity
     left join account
